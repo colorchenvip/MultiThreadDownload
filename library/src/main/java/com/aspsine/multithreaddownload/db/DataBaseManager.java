@@ -2,6 +2,9 @@ package com.aspsine.multithreaddownload.db;
 
 import android.content.Context;
 
+import com.aspsine.multithreaddownload.DownloadInfo;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,5 +43,20 @@ public class DataBaseManager {
 
     public boolean exists(String tag, int threadId) {
         return mThreadInfoDao.exists(tag, threadId);
+    }
+
+    public List<DownloadInfo> getDownloadInfos(String tag) {
+        List<DownloadInfo> downloadInfos = new ArrayList<>();
+        List<ThreadInfo> list=mThreadInfoDao.getThreadInfos(tag);
+        for (ThreadInfo threadInfo:list
+             ) {
+            DownloadInfo info = new DownloadInfo();
+            info.setName(threadInfo.getTag());
+            info.setLength(threadInfo.getEnd());
+            info.setProgress((int) (threadInfo.getFinished()/threadInfo.getEnd()*100));
+            info.setUri(threadInfo.getUri());
+            downloadInfos.add(info);
+        }
+        return downloadInfos;
     }
 }

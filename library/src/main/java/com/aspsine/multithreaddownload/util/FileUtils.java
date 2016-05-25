@@ -30,4 +30,8 @@ public class FileUtils {
     public static final String getSuffix(@NonNull String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
+
+    public static final void delete(File dir){
+
+    }
 }

@@ -13,6 +13,7 @@ import com.aspsine.multithreaddownload.core.DownloadStatusDeliveryImpl;
 import com.aspsine.multithreaddownload.core.DownloaderImpl;
 import com.aspsine.multithreaddownload.db.DataBaseManager;
 import com.aspsine.multithreaddownload.db.ThreadInfo;
+import com.aspsine.multithreaddownload.util.FileUtils;
 import com.aspsine.multithreaddownload.util.L;
 
 import java.util.LinkedHashMap;
@@ -134,22 +135,22 @@ public class DownloadManager implements Downloader.OnDownloaderDestroyedListener
         }
     }
 
-//    public void delete(String tag) {
-//        String key = createKey(tag);
-//        if (mDownloaderMap.containsKey(key)) {
-//            Downloader downloader = mDownloaderMap.get(key);
-//            downloader.cancel();
-//        } else {
-//            List<DownloadInfo> infoList = mDBManager.getDownloadInfos(tag);
-//            for (DownloadInfo info : infoList) {
-//                FileUtils.delete(info.getD);
-//            }
-//        }
-//    }
-//
-//    public void deleteAll() {
-//
-//    }
+    public void delete(String tag) {
+        String key = createKey(tag);
+        if (mDownloaderMap.containsKey(key)) {
+            Downloader downloader = mDownloaderMap.get(key);
+            downloader.cancel();
+        } else {
+            List<DownloadInfo> infoList = mDBManager.getDownloadInfos(tag);
+            for (DownloadInfo info : infoList) {
+                FileUtils.delete(info.getDir());
+            }
+        }
+    }
+
+    public void deleteAll() {
+        // TODO: 16/5/25  
+    }
 
     public DownloadInfo getDownloadProgress(String tag) {
         String key = createKey(tag);

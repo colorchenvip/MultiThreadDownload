@@ -53,7 +53,7 @@ public class ListViewFragment extends Fragment implements OnItemClickListener<Ap
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDownloadDir = new File(Environment.getExternalStorageDirectory(), "Download");
+        mDownloadDir = new File(Environment.getExternalStorageDirectory(), "001_Test_Download");
         mAdapter = new ListViewAdapter();
         mAdapter.setOnItemClickListener(this);
         mAppInfos = DataSource.getInstance().getData();
